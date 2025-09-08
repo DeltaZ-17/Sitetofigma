@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation */
+        .nav {
+            background: #1a2332;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #4a90e2;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Account Container */
+        .account-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .user-profile {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #4a90e2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .user-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #1a2332;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-email {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: #666;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: #4a90e2;
+            color: white;
+        }
+
+        /* Content Area */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #1a2332;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        /* Mes Infos Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #4a90e2;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: #1a2332;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .edit-button {
+            background: #4a90e2;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        /* Orders Section */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .order-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .order-item:hover {
+            background: #e9ecef;
+        }
+
+        .order-info h4 {
+            font-weight: 500;
+            color: #1a2332;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .order-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-shipped {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        /* Reviews Section */
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .review-item {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .review-product {
+            font-weight: 500;
+            color: #1a2332;
+        }
+
+        .review-rating {
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a2332;
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #4a90e2;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2c3e50;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .account-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">LOGO</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="page_produit.html">Produit</a></li>
+                <li><a href="page_compte.html" class="active">Compte</a></li>
+                <li><a href="page_autres.html">Autres</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 class="page-title">Page Compte</h1>
+        <p class="page-subtitle">Gérez vos informations et commandes</p>
+    </div>
+
+    <!-- Account Container -->
+    <div class="account-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div class="user-name">Johannes Doe</div>
+                <div class="user-email">johannes.doe@email.com</div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#infos" class="active">Mes Infos</a></li>
+                <li><a href="#commandes">Mes Commandes</a></li>
+                <li><a href="#avis">Mes Avis</a></li>
+                <li><a href="#preferences">Préférences</a></li>
+                <li><a href="#securite">Sécurité</a></li>
+                <li><a href="#deconnexion">Déconnexion</a></li>
+            </ul>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Mes Infos Section -->
+            <div class="content-section" id="infos">
+                <h2 class="section-title">Mes Infos</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Nom Complet</div>
+                        <div class="info-value">Johannes Doe</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Adresse Email</div>
+                        <div class="info-value">johannes.doe@email.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Téléphone</div>
+                        <div class="info-value">+33 1 23 45 67 89</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Date de Naissance</div>
+                        <div class="info-value">15 Martii 1990</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Adresse</div>
+                        <div class="info-value">123 Rue Lorem Ipsum<br>75001 Parisiis, Francia</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Membre depuis</div>
+                        <div class="info-value">Januarius 2023</div>
+                    </div>
+                </div>
+                <button class="edit-button">Modifier mes informations</button>
+            </div>
+
+            <!-- Mes Commandes Section -->
+            <div class="content-section" id="commandes">
+                <h2 class="section-title">Mes Commandes</h2>
+                <div class="orders-list">
+                    <div class="order-item">
+                        <div class="order-info">
+                            <h4>Commande #CMD-2025-001</h4>
+                            <div class="order-details">
+                                3 Septembre 2025 • €299.99<br>
+                                Produit Premium Lorem Ipsum
+                            </div>
+                        </div>
+                        <div class="order-status status-completed">Livré</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-info">
+                            <h4>Commande #CMD-2025-002</h4>
+                            <div class="order-details">
+                                1 Septembre 2025 • €149.99<br>
+                                Accessorium Dolor Sit
+                            </div>
+                        </div>
+                        <div class="order-status status-shipped">Expédié</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-info">
+                            <h4>Commande #CMD-2025-003</h4>
+                            <div class="order-details">
+                                28 Août 2025 • €89.99<br>
+                                Consectetur Adipiscing Kit
+                            </div>
+                        </div>
+                        <div class="order-status status-pending">En préparation</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mes Avis Section -->
+            <div class="content-section" id="avis">
+                <h2 class="section-title">Mes Avis</h2>
+                <div class="reviews-list">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-product">Produit Premium Lorem Ipsum</div>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <div class="review-text">
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+                        </div>
+                        <div class="review-date">Publié le 5 Septembre 2025</div>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-product">Accessorium Dolor Sit</div>
+                            <div class="review-rating">★★★★☆</div>
+                        </div>
+                        <div class="review-text">
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.
+                        </div>
+                        <div class="review-date">Publié le 2 Septembre 2025</div>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-product">Consectetur Adipiscing Kit</div>
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <div class="review-text">
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Totam rem aperiam, eaque ipsa quae ab illo inventore.
+                        </div>
+                        <div class="review-date">Publié le 30 Août 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Politique de confidentialité</a>
+                <a href="#terms">Conditions d'utilisation</a>
+                <a href="#support">Support</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Votre Entreprise. Omnis iste natus error sit voluptatem.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
